@@ -3,173 +3,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GTA VI Countdown</title>
-
 <style>
 * { box-sizing: border-box; }
-
 body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  color: white;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background:
-    linear-gradient(rgba(10,5,30,.45), rgba(10,5,30,.85)),
-    url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=85")
-    center/cover fixed;
+ margin:0; min-height:100vh; color:white;
+ font-family:Arial,sans-serif;
+ display:flex; align-items:center; justify-content:center;
+ text-align:center;
+ background:
+ linear-gradient(#16001a55,#10001899),
+ url("gta-background.png") center center / cover fixed;
 }
-
 .container {
-  width: 92%;
-  max-width: 650px;
-  padding: 35px 18px;
-  background: rgba(10, 5, 30, .65);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 22px;
-  box-shadow: 0 0 35px #ff3cac88;
-  backdrop-filter: blur(8px);
+ width:94%; max-width:650px; padding:28px 14px;
+ background:#12001dcc; border:2px solid #ff48df;
+ border-radius:22px; box-shadow:0 0 30px #ff00cc;
 }
-
-h1 {
-  font-size: clamp(42px, 10vw, 76px);
-  margin: 0;
-  line-height: 1.1;
-  color: #ff75c8;
-  text-shadow: 0 0 15px #ff00aa;
-}
-
-h2 {
-  color: #ffd1ed;
-  letter-spacing: 5px;
-  margin-top: 12px;
-}
-
-p { color: #eee; }
-
-.timer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin: 30px 0;
-}
-
-.time {
-  background: rgba(255,255,255,.12);
-  border: 1px solid #ff75c8;
-  border-radius: 12px;
-  padding: 15px 4px;
-}
-
-.time span {
-  display: block;
-  font-size: clamp(24px, 6vw, 38px);
-  font-weight: bold;
-  color: #fff;
-}
-
-.time small {
-  color: #ffb8e5;
-  font-size: 11px;
-}
-
+h1 {font-size:clamp(32px,8vw,62px);margin:0;text-shadow:0 0 15px #ff00d4;}
+h2 {font-size:38px;color:#ff75e6;margin:4px;}
+.subtitle {letter-spacing:4px;color:#ffd5f7;}
+.timer {display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:25px 0;}
+.time {padding:14px 3px;background:#24002dcc;border:1px solid #ff55e8;border-radius:12px;}
+.time span {display:block;font-size:clamp(22px,6vw,36px);font-weight:bold;}
+.time small {font-size:10px;color:#ff9dea;}
 button {
-  padding: 13px 24px;
-  border: 0;
-  border-radius: 30px;
-  background: linear-gradient(90deg,#ff3cac,#784ba0);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+ border:0;border-radius:30px;padding:14px 25px;
+ background:linear-gradient(90deg,#ff22c8,#773cff);
+ color:white;font-size:17px;font-weight:bold;
 }
-
-.footer {
-  margin-top: 25px;
-  font-size: 12px;
-  color: #ddd;
+.footer {margin-top:25px;letter-spacing:3px;font-size:12px;}
+@media(max-width:400px) {
+ .time {padding:10px 1px;}
+ .time small {font-size:9px;}
 }
 </style>
 </head>
-
 <body>
 <div class="container">
-  <h1>GRAND THEFT AUTO</h1>
-  <h2>VI</h2>
-  <p>THE COUNTDOWN IS ON</p>
+ <h1>GRAND THEFT AUTO</h1>
+ <h2>VI</h2>
+ <p class="subtitle">COMING SOON...</p>
 
-  <div class="timer">
-    <div class="time"><span id="days">0</span><small>DAYS</small></div>
-    <div class="time"><span id="hours">0</span><small>HOURS</small></div>
-    <div class="time"><span id="minutes">0</span><small>MINUTES</small></div>
-    <div class="time"><span id="seconds">0</span><small>SECONDS</small></div>
-  </div>
+ <div class="timer">
+  <div class="time"><span id="days">0</span><small>DAYS</small></div>
+  <div class="time"><span id="hours">0</span><small>HOURS</small></div>
+  <div class="time"><span id="minutes">0</span><small>MINUTES</small></div>
+  <div class="time"><span id="seconds">0</span><small>SECONDS</small></div>
+ </div>
 
-  <button id="musicButton" onclick="toggleMusic()">🎵 Music ON</button>
-  <div class="footer">A FAN-MADE COUNTDOWN EXPERIENCE</div>
+ <button id="musicBtn" onclick="toggleMusic()">🎵 MUSIC ON</button>
+ <p class="footer">THE NEXT CHAPTER BEGINS</p>
+ <p style="font-size:11px">Unofficial fan-made countdown</p>
 </div>
 
 <script>
-const releaseDate = new Date("2026-11-19T00:00:00+05:30").getTime();
+const target = new Date("2026-11-19T00:00:00+05:30").getTime();
 
-function updateCountdown() {
-  let distance = releaseDate - Date.now();
-  if (distance < 0) distance = 0;
-
-  document.getElementById("days").textContent =
-    Math.floor(distance / 86400000);
-  document.getElementById("hours").textContent =
-    Math.floor((distance % 86400000) / 3600000);
-  document.getElementById("minutes").textContent =
-    Math.floor((distance % 3600000) / 60000);
-  document.getElementById("seconds").textContent =
-    Math.floor((distance % 60000) / 1000);
+function update() {
+ let d = Math.max(0,target-Date.now());
+ document.getElementById("days").textContent=Math.floor(d/86400000);
+ document.getElementById("hours").textContent=Math.floor(d%86400000/3600000);
+ document.getElementById("minutes").textContent=Math.floor(d%3600000/60000);
+ document.getElementById("seconds").textContent=Math.floor(d%60000/1000);
 }
+update();
+setInterval(update,1000);
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// Original synthesized background beat
-let audioContext, musicTimer, playing = false;
+let ctx=null, playing=false, timer=null;
 
 function toggleMusic() {
-  const button = document.getElementById("musicButton");
+ const btn=document.getElementById("musicBtn");
+ if(playing) {
+  clearInterval(timer);
+  ctx.suspend();
+  playing=false;
+  btn.textContent="🎵 MUSIC ON";
+  return;
+ }
+ ctx=ctx || new (window.AudioContext || window.webkitAudioContext)();
+ ctx.resume();
 
-  if (playing) {
-    clearInterval(musicTimer);
-    audioContext.suspend();
-    playing = false;
-    button.textContent = "🎵 Music ON";
-    return;
-  }
-
-  audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
-  audioContext.resume();
-
-  function beat() {
-    const now = audioContext.currentTime;
-    const osc = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(65, now);
-    gain.gain.setValueAtTime(0.3, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-
-    osc.connect(gain);
-    gain.connect(audioContext.destination);
-    osc.start(now);
-    osc.stop(now + 0.4);
-  }
-
-  beat();
-  musicTimer = setInterval(beat, 600);
-  playing = true;
-  button.textContent = "🔇 Music OFF";
+ function sound() {
+  const now=ctx.currentTime;
+  [130.81,164.81,196,164.81].forEach((freq,i)=>{
+   const osc=ctx.createOscillator();
+   const gain=ctx.createGain();
+   osc.type="triangle";
+   osc.frequency.value=freq;
+   gain.gain.setValueAtTime(0.0001,now);
+   gain.gain.exponentialRampToValueAtTime(0.12,now+0.04);
+   gain.gain.exponentialRampToValueAtTime(0.0001,now+0.48);
+   osc.connect(gain);
+   gain.connect(ctx.destination);
+   osc.start(now+i*0.12);
+   osc.stop(now+0.55+i*0.12);
+  });
+ }
+ sound();
+ timer=setInterval(sound,1800);
+ playing=true;
+ btn.textContent="🔇 MUSIC OFF";
 }
 </script>
 </body>
