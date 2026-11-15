@@ -1,1 +1,55 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA VI Countdown Live</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;
+ display:flex;align-items:center;justify-content:center;
+ text-align:center;color:white;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#160d35,#6d2365,#ed704f);
+}
+.container{padding:25px;width:100%}
+h1{font-size:clamp(35px,8vw,75px);color:#ffd47c}
+h2{letter-spacing:5px}
+.timer{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.unit{
+ background:#171127dd;padding:20px 12px;
+ border-radius:14px;min-width:75px;
+}
+.number{font-size:clamp(28px,6vw,50px);font-weight:bold}
+small{color:#ffd47c}
+.live{color:#ff5353;font-weight:bold;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>GRAND THEFT AUTO VI</h1>
+<h2>RELEASE COUNTDOWN</h2>
+<div class="timer">
+ <div class="unit"><div class="number" id="d">00</div><small>DAYS</small></div>
+ <div class="unit"><div class="number" id="h">00</div><small>HOURS</small></div>
+ <div class="unit"><div class="number" id="m">00</div><small>MINUTES</small></div>
+ <div class="unit"><div class="number" id="s">00</div><small>SECONDS</small></div>
+</div>
+<div class="live">● COUNTDOWN RUNNING 24/7</div>
+</div>
+<script>
+const target = new Date("2026-11-19T00:00:00+05:30").getTime();
+function update(){
+ let diff=Math.max(0,target-Date.now());
+ document.getElementById("d").textContent=Math.floor(diff/86400000);
+ document.getElementById("h").textContent=Math.floor(diff%86400000/3600000);
+ document.getElementById("m").textContent=Math.floor(diff%3600000/60000);
+ document.getElementById("s").textContent=Math.floor(diff%60000/1000);
+}
+update();
+setInterval(update,1000);
+</script>
+</body>
+</html>
